@@ -20,7 +20,13 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /opt/apps/project/nest-one
-            git pull
+            cd /home/ubuntu/opt/apps/project
+
+            if [ ! -d ".git" ]; then
+              git clone https://github.com/Sayedtaqi313/nest-one.git .
+            else
+              git pull
+            fi
+
             docker compose build
             docker compose up -d
