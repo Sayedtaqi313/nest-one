@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /opt/apps/project
+            cd /opt/apps/project/nest-one
             git pull
             docker compose build
             docker compose up -d
