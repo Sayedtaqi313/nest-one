@@ -20,7 +20,6 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            mkdir -p /opt/apps/project
             cd /opt/apps/project
             git pull
             docker compose build
