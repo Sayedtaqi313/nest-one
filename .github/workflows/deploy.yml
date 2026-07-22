@@ -1,4 +1,4 @@
-name: First test
+name: First deployment
 
 on:
   push:
@@ -13,11 +13,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: SSH to server
+      - name: Deploy
         uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+
+            if [ ! -d ".git" ]; then
+              git clone https://github.com/Sayedtaqi313/nest-one.git .
+            else
+              git pull
+            fi
+
             docker compose up --build -d
