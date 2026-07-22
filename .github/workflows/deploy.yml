@@ -1,71 +1,23 @@
 name: First test
 
-push:
-  on:
+on:
+  push:
     branches:
       - main
 
 jobs:
   deploy:
-  runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-  steps:
-  name: Checkout
-  uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  name: Ssh to server
-  uses: appleboy/ssh-action@v1.2.2
-  with:
-    host: ${{ secrets.SSH_HOST }}
-    username: ${{ secrets.SSH_USER }}
-    key: ${{ secrets.SSH_KEY }}
-    scripts: |
-      docker compose --build
-      docker compose up -d
-
-# name: Second deployment test
-
-# on:
-#   push:
-#     branches:
-#       - main
-
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Test
-#         uses: actions@checkout@v4
-
-# name: First deployment
-
-# on:
-#   push:
-#     branches:
-#       - main
-
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v4
-
-#       - name: Deploy
-#         uses: appleboy/ssh-action@v1.2.2
-#         with:
-#           host: ${{ secrets.SSH_HOST }}
-#           username: ${{ secrets.SSH_USER }}
-#           key: ${{ secrets.SSH_KEY }}
-#           script: |
-#             mkdir -p /opt/apps/project
-#             cd /opt/apps/project
-
-#             if [ ! -d ".git" ]; then
-#               git clone https://github.com/Sayedtaqi313/nest-one.git .
-#             else
-#               git pull
-#             fi
-
-#             docker compose up --build -d
+      - name: SSH to server
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            docker compose up --build -d
