@@ -38,7 +38,7 @@ jobs:
           script: |
             set -e
 
-            cd /home/ubuntu/projects
+            cd /home/ubuntu/projects/backend
 
             if [ ! -d ".git" ]; then
               echo "Cloning repository..."
