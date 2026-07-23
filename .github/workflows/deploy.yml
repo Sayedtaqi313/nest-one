@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  Build:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,8 @@ jobs:
       - name: Build application
         run: npm run build
 
-  Deploy:
+  deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Ssh to the server
