@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  Build:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,10 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Deploy
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ssh to the server
         uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ secrets.SSH_HOST }}
